@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TodosController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -94,3 +95,12 @@ Route::post('/profile/update', function (Request $request) {
         'user' => $user,
     ], 200);
 })->middleware('auth:sanctum');
+
+// Todo
+
+Route::post('/store-todo', [TodosController::class, 'store'])->middleware('auth:sanctum');
+Route::post('/update-todo', [TodosController::class, 'update'])->middleware('auth:sanctum');
+Route::post('/destroy-todo', [TodosController::class, 'destroy'])->middleware('auth:sanctum');
+Route::get('/show-todos', [TodosController::class, 'index'])->middleware('auth:sanctum');
+Route::get('/show-todo/{todo_id}', [TodosController::class, 'show'])->middleware('auth:sanctum');
+Route::get('/edit-todo/{todo_id}', [TodosController::class, 'edit'])->middleware('auth:sanctum');
